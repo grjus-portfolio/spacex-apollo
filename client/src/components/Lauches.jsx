@@ -12,9 +12,11 @@ query LauchesQuery{
 		mission_name
 		launch_date_local
 		launch_success
+		details
 	}
 }
 `;
+
 
 export default class Lauches extends Component {
 	render() {
@@ -24,15 +26,14 @@ export default class Lauches extends Component {
 				<MissionKey />
 				<Query query={LAUNCHES_QUERY}>
 					{
-						({ loading, error, data }) => {
+						({ loading, error, data, details }) => {
 							if (loading) return <h4>Loading...</h4>;
 							if (error) return console.log(error);
-							console.log(data);
 							return (
 								<>
 									{
 										data.launches.map(launch => (
-											<LaunchItem key={launch.flight_number} launch={launch} />
+											<LaunchItem key={launch.flight_number} launch={launch} details={details} />
 										))
 									}
 								</>

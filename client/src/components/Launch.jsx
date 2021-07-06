@@ -12,15 +12,31 @@ query LaunchQuery($flight_number: Int!) {
 		launch_year
 		launch_success
 		launch_date_local
+		details
+		links {
+			mission_patch
+		}
 		rocket {
 			rocket_id
 			rocket_name
 			rocket_type
 		}
 	}
-
 }
 `;
+
+
+const ROCKET_QUERY = gql`
+query RocketQuery($id: String!) {
+	rocket(id : $id) {
+		description
+	}
+}
+
+`;
+
+
+
 
 export class Launch extends Component {
 	render() {
@@ -31,19 +47,28 @@ export class Launch extends Component {
 				<Query query={LAUNCH_QUERY} variables={{ flight_number }}>
 					{
 						({ loading, error, data }) => {
-							if (loading) return <h4>Loading</h4>;
+							if (loading) return <div className="spinner-border" status="role" style={{ margin: "auto" }} />;
 							if (error) return console.log(error);
 							const
 								{ mission_name,
 									flight_number,
 									launch_year,
 									launch_success,
+									links: { mission_patch },
 									rocket: { rocket_id, rocket_name, rocket_type }
 								} = data.launch;
 
 							return <div>
 								<h1 className="display-4 my-3"><span className="text-dark">Mission:{mission_name}</span></h1>
-								<h4 className="mb-3">Launch details</h4>
+								<div className="d-flex justify-content-start">
+									<div className="p-2">
+										<h4 className="mb-3">Launch details</h4>
+									</div>
+									<div className="p-2">
+										<img src={mission_patch} alt="picture" style={{ width: 40, display: 'block', margin: 'auto' }} />
+									</div>
+
+								</div>
 								<ul className="list-group">
 									<li className="list-group-item">
 										Flight number: {flight_number}
@@ -63,8 +88,19 @@ export class Launch extends Component {
 									<li className="list-group-item">Rocket ID: {rocket_id}</li>
 									<li className="list-group-item">Rocket Name: {rocket_name}</li>
 									<li className="list-group-item">Rocket Type: {rocket_type}</li>
+									<Query query={ROCKET_QUERY} variables={{ id: rocket_id }}>
+										{
+											({ loading, error, data }) => {
+												if (error) return console.log(error);
+												if (loading) return <div className="spinner-border" role="status" />;
+												return <li className="list-group-item">"{data.rocket.description}"</li>;
+											}
+
+										}
+									</Query>
 								</ul>
 								<hr />
+
 								<Link to="" className="btn btn-secondary">Back</Link>
 							</div>;
 

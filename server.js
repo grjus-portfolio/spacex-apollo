@@ -2,6 +2,7 @@ const express = require('express');
 const graphqlHTTP = require('express-graphql').graphqlHTTP;
 const cors = require('cors');
 const schema = require('./schema');
+const path = require('path');
 
 const app = express();
 
@@ -14,6 +15,12 @@ app.use('/graphql', graphqlHTTP({
 	graphiql: true
 }),
 );
+
+app.use(express.static('public'));
+
+app.get('*', (req, res) => {
+	res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+});
 
 
 // In development listens to 5000, on heroku uses process.env.PORT
