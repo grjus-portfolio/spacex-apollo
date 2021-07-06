@@ -20,22 +20,11 @@ query LaunchQuery($flight_number: Int!) {
 			rocket_id
 			rocket_name
 			rocket_type
+            description
 		}
 	}
 }
 `;
-
-
-const ROCKET_QUERY = gql`
-query RocketQuery($id: String!) {
-	rocket(id : $id) {
-		description
-	}
-}
-
-`;
-
-
 
 
 export class Launch extends Component {
@@ -55,7 +44,7 @@ export class Launch extends Component {
 									launch_year,
 									launch_success,
 									links: { mission_patch },
-									rocket: { rocket_id, rocket_name, rocket_type }
+									rocket: { rocket_id, rocket_name, rocket_type, description }
 								} = data.launch;
 
 							return <div>
@@ -88,20 +77,12 @@ export class Launch extends Component {
 									<li className="list-group-item">Rocket ID: {rocket_id}</li>
 									<li className="list-group-item">Rocket Name: {rocket_name}</li>
 									<li className="list-group-item">Rocket Type: {rocket_type}</li>
-									<Query query={ROCKET_QUERY} variables={{ id: rocket_id }}>
-										{
-											({ loading, error, data }) => {
-												if (error) return console.log(error);
-												if (loading) return <div className="spinner-border" role="status" />;
-												return <li className="list-group-item">"{data.rocket.description}"</li>;
-											}
-
-										}
-									</Query>
+									<li className="list-group-item">Description: {description}</li>
+                                    
 								</ul>
 								<hr />
 
-								<Link to="" className="btn btn-secondary">Back</Link>
+								<Link to="/launches" className="btn btn-secondary">Back</Link>
 							</div>;
 
 						}
