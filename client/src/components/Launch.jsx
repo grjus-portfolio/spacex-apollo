@@ -20,7 +20,7 @@ query LaunchQuery($flight_number: Int!) {
 			rocket_id
 			rocket_name
 			rocket_type
-            description
+            	description
 		}
 	}
 }
@@ -78,7 +78,7 @@ export class Launch extends Component {
 									<li className="list-group-item">Rocket Name: {rocket_name}</li>
 									<li className="list-group-item">Rocket Type: {rocket_type}</li>
 									<li className="list-group-item">Description: {description}</li>
-                                    
+
 								</ul>
 								<hr />
 

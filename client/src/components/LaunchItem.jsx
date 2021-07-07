@@ -8,11 +8,14 @@ export default function LaunchItem({ launch: { flight_number, mission_name, laun
 		<div className="card card-body mb-3">
 			<div className="row">
 				<div className="col-md-9">
-					<h4>Mission: <span className={classNames({
-						'text-success': launch_success,
-						'text-danger': !launch_success
-					})}>{mission_name}</span></h4>
+
+					<h5>Mission: <span className="text-primary">{mission_name}</span></h5>
 					Date: <Moment format="YYYY-MM-DD HH:mm">{launch_date_local}</Moment>
+
+					<p>Launch:<span className={classNames({
+						"text-success": launch_success,
+						"text-danger": !launch_success
+					})}>{launch_success ? "Sucess" : "Failed"}</span></p>
 
 				</div>
 
