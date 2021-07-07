@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
 import LaunchItem from './LaunchItem';
-import Sorter from './Sorter';
-import { useQuery } from "react-apollo";
+import { useLazyQuery } from "react-apollo";
+import Search from "./Search";
+import LoadingScreen from './LoadingScreen';
 
 
 const LAUNCHES_QUERY = gql`
-query LauchesQuery{
-	launches {
+query LauchesQuery($miss_name:String){
+	launches(miss_name:$miss_name) {
 		flight_number
 		mission_name
 		launch_date_local
@@ -21,16 +21,46 @@ query LauchesQuery{
 
 export default function Lunches() {
 
-	const { loading, error, data } = useQuery(LAUNCHES_QUERY);
+	const [search, setSearch] = useState("");
+	const [fetchData, { loading, data, error }] = useLazyQuery(LAUNCHES_QUERY);
 
-	if (loading) return <h4>Loading...</h4>;
+
+	useEffect(() => {
+
+		let timer = setTimeout(() => {
+			fetchData({
+				variables: {
+					miss_name: search
+				}
+			});
+		}, 500);
+
+		return () => {
+			clearTimeout(timer);
+		};
+
+	}, [search]);
+
+
+
+
+	const handleSearch = (e) => {
+		setSearch(e.target.value);
+
+	};
+
+
+
+	if (loading) return <><LoadingScreen /><Search handleSearch={handleSearch} search={search} /></>;
 	if (error) return console.log(error);
+
+
 	return (
 		<>
-			<h4 className="display-6 my-3">Launches</h4>
-			<Sorter />
+			<Search handleSearch={handleSearch} search={search} />
+			{/* <h4 className="display-6 my-3">Launches</h4> */}
 			{
-				data.launches.map(launch => (
+				data?.launches?.map(launch => (
 					<LaunchItem key={launch.flight_number} launch={launch} details={launch.details} />
 				))
 			}

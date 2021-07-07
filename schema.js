@@ -59,9 +59,14 @@ const RootQuery = new GraphQLObjectType({
 	fields: {
 		launches: {
 			type: new GraphQLList(LaunchType),
+			args: {
+				miss_name: { type: GraphQLString }
+			},
 			resolve(parent, args) {
 				return axios.get('https://api.spacexdata.com/v3/launches')
-					.then(res => res.data);
+					.then(res => {
+						return res.data.filter(item => item.mission_name.includes(args.miss_name));
+					});
 			}
 		},
 		launch: {

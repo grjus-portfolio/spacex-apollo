@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import LoadingScreen from "./LoadingScreen";
 
 const LAUNCH_QUERY = gql`
 query LaunchQuery($flight_number: Int!) {
@@ -36,7 +37,7 @@ export class Launch extends Component {
 				<Query query={LAUNCH_QUERY} variables={{ flight_number }}>
 					{
 						({ loading, error, data }) => {
-							if (loading) return <div className="spinner-border" status="role" style={{ margin: "auto" }} />;
+							if (loading) return <LoadingScreen />;
 							if (error) return console.log(error);
 							const
 								{ mission_name,
