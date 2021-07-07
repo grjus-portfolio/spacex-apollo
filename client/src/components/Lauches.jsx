@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import gql from 'graphql-tag';
 import LaunchItem from './LaunchItem';
 import { useLazyQuery } from "react-apollo";
@@ -25,7 +25,7 @@ export default function Lunches() {
 	const [fetchData, { loading, data, error }] = useLazyQuery(LAUNCHES_QUERY);
 
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 
 		let timer = setTimeout(() => {
 			fetchData({

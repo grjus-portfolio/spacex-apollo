@@ -3,11 +3,10 @@ import ReactDom from 'react-dom';
 
 const MODAL_STYLE = {
 	position: "fixed",
-	width: "100%",
 	top: "50%",
-	left: "45%",
-	// transform: "translate(-50 %, 0)",
-	// padding: "50px",
+	left: "50%",
+	marginTop: "-50px",
+	marginLeft: "-100px",
 	zIndex: 1000,
 	fontSize: "24px"
 
@@ -17,10 +16,10 @@ const OVERLAY = {
 	position: "fixed",
 	top: "30%",
 	bottom: "30%",
-	left: "30%",
-	right: "30%",
+	left: "0%",
+	right: "0%",
 	background: "rgba(0, 0, 0, 0.5)",
-	zIndex: 1000
+	zIndex: 1000,
 };
 
 function LoadingScreen() {
