@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
-
-
+import React from 'react';
+import PropTypes from 'prop-types';
 
 function Search({ handleSearch, search }) {
-
-
-
-	return (
-		<form class="d-flex">
-			<input onChange={handleSearch} value={search} class="form-control me-sm-2 my-4" type="text" placeholder="Search mission" />
-			{/* <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> */}
-		</form>
-	);
+  return (
+    <form className="d-flex">
+      <input
+        onChange={handleSearch}
+        value={search}
+        className="form-control me-sm-2 my-4"
+        type="text"
+        placeholder="Search mission"
+      />
+    </form>
+  );
 }
 
 export default Search;
+
+Search.propTypes = {
+  handleSearch: PropTypes.func.isRequired,
+  search: PropTypes.string.isRequired,
+};

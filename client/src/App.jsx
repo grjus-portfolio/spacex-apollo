@@ -1,20 +1,25 @@
-import './App.css';
-import logo from "./logo.svg";
-import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "react-apollo";
-import Launches from "./components/Lauches";
-import Launch from "./components/Launch";
+import { ApolloProvider } from 'react-apollo';
+import ApolloClient from 'apollo-boost';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from 'react';
+import './App.css';
+import logo from './logo.svg';
+import Launches from './components/Lauches';
+import Launch from './components/Launch';
 import Navbar from './components/Navbar';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql'
+  uri: 'http://localhost:5000/graphql',
 });
 
 function App() {
   return (
     <ApolloProvider client={client}>
-      <img src={logo} alt="spaceX" style={{ width: 300, display: 'block', margin: 'auto' }} />
+      <img
+        src={logo}
+        alt="spaceX"
+        style={{ width: 300, display: 'block', margin: 'auto' }}
+      />
       <Router>
         <Navbar />
         <div className="container">
