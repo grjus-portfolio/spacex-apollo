@@ -5,6 +5,7 @@ import React from 'react';
 import './App.css';
 import logo from './logo.svg';
 import Launches from './components/Lauches';
+import Rockets from './components/Rockets';
 import Launch from './components/Launch';
 import Navbar from './components/Navbar';
 
@@ -25,6 +26,7 @@ function App() {
         <div className="container">
           <Switch>
             <Route exact path="/launches" component={Launches} />
+            <Route exact path="/rockets" component={Rockets} />
             <Route exact path="/launch/:id" component={Launch} />
           </Switch>
         </div>
