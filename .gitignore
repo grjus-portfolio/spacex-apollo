@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Exclude client folder. This will be avaible in our server folder
+# /client
