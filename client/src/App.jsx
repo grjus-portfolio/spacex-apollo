@@ -20,7 +20,7 @@ function App() {
         <div className="container">
           <Switch>
             <Route exact path="/launches" component={Launches} />
-            <Route exact path="/launch/:flight_number" component={Launch} />
+            <Route exact path="/launch/:id" component={Launch} />
           </Switch>
         </div>
       </Router>

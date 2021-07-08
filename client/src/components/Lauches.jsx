@@ -9,10 +9,10 @@ import LoadingScreen from './LoadingScreen';
 const LAUNCHES_QUERY = gql`
 query LauchesQuery($miss_name:String){
 	launches(miss_name:$miss_name) {
-		flight_number
-		mission_name
-		launch_date_local
-		launch_success
+		id
+		name
+		date_local
+		success
 		details
 	}
 }
@@ -61,7 +61,7 @@ export default function Lunches() {
 			{/* <h4 className="display-6 my-3">Launches</h4> */}
 			{
 				data?.launches?.map(launch => (
-					<LaunchItem key={launch.flight_number} launch={launch} details={launch.details} />
+					<LaunchItem key={launch.id} launch={launch} details={launch.details} />
 				))
 			}
 		</>
