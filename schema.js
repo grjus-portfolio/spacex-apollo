@@ -1,6 +1,7 @@
 const {
   GraphQLObjectType,
   GraphQLString,
+  GraphQLInt,
   GraphQLBoolean,
   GraphQLList,
   GraphQLSchema,
@@ -36,7 +37,7 @@ const RocketType = new GraphQLObjectType({
     missions: {
       type:new GraphQLList(LaunchType),
       resolve: (parent, args)=>axios.get(LAUNCHES_URL).then(res=>res.data.filter(item=>item.rocket===parent.id))
-    }
+    },
   }),
 });
 
@@ -83,11 +84,8 @@ const RootQuery = new GraphQLObjectType({
     },
     rockets: {
       type: new GraphQLList(RocketType),
-      args:{
-        name:{ type: GraphQLString }
-      },
       resolve(parent, args) {
-        return axios.get(ROCKETS_URL).then((res) => res.data.filter(item=>item.name.toLowerCase().includes(args.name.toLowerCase())));
+        return axios.get(ROCKETS_URL).then((res) => res.data);
       },
     },
     rocket: {
