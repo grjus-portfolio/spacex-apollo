@@ -33,7 +33,7 @@ export default function RocketItem({
           </p>
         </div>
         <div className="col-lg-4">
-          <img src={images[0]} alt={`rocket-${name}`} style={{ width: '100%' }} />
+          <img src={images[0]} alt={`rocket-${name}`} style={{ width: '80%' }} />
         </div>
         <hr />
         <div className="accordion" id="accordionExample">
