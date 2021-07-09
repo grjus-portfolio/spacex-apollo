@@ -32,8 +32,8 @@ export default function RocketItem({
             <span className="text-secondary">{missions.length}</span>
           </p>
         </div>
-        <div className="col-md-auto">
-          <img src={images[0]} alt={`rocket-${name}`} style={{ width: 400 }} />
+        <div className="col-lg-4">
+          <img src={images[0]} alt={`rocket-${name}`} style={{ width: '100%' }} />
         </div>
         <hr />
         <div className="accordion" id="accordionExample">
