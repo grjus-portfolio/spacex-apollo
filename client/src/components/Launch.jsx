@@ -109,11 +109,11 @@ export default function Launch(props) {
       <div className="container my-4">
         <div className="row">
           {rocket.flickr_images.map((item) => (
-            <div key={item} className="col-md my-2">
+            <div key={item} className="col-md-4 my-2">
               <img
                 src={item}
                 alt="rocket"
-                style={{ width: 400, display: 'block', margin: 'auto' }}
+                style={{ width: '100%', display: 'block', margin: 'auto' }}
               />
             </div>
           ))}
